@@ -5,8 +5,8 @@
 |          Name          |         Email        | Clave Única | Guthub Handler                                                  |
 |:----------------------:|:--------------------:|:-----------:|-----------------------------------------------------------------|
 | Julio Lezama Amastalli | lezamaja@live.com.mx |    149341   | [JulioLezamaAmastalli](https://github.com/JulioLezamaAmastalli) |
-|Fernando Miñaur Olivares| fminaurol@gmail.com  |    158125   | [Fminaurol](https://github.com/Fminaurol)                                                               |
-|                        |                      |             |                                                                 |
+|Fernando Miñaur Olivares| fminaurol@gmail.com  |    158125   | [Fminaurol](https://github.com/Fminaurol)                       |
+| Miguel Calvo Valente   | mig.calval@gmail.com |    203129   | [mig-calval](https://github.com/mig-calval)                     |
 
 # Why do we think we are an awesome team?
 
