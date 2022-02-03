@@ -1,9 +1,6 @@
-
 # Title: ubiquitous-goggles / team 4
 
-
 # Teams members 
-
 
 |          Name          |         Email        | Clave Única | Guthub Handler                                                  |
 |:----------------------:|:--------------------:|:-----------:|-----------------------------------------------------------------|
@@ -11,7 +8,9 @@
 |                        |                      |             |                                                                 |
 |                        |                      |             |                                                                 |
 
+# Why do we think we are an awesome team?
 
+As a team, our skills, knowledge and experiences allow us to address problems from different approaches such as statistical, computational and economic. So our data-driven solution proposals have the potential to add value to our audience.
 
 # Repository Content 
 
@@ -23,9 +22,6 @@ In this repository we will develop our Data Product Architecture Project, at the
 Contributions are always welcome!
 
 See `contributing.md` for ways to get started.
-
-
-
 
 # FAQ
 
