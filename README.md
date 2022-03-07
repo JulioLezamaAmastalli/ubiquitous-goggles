@@ -45,6 +45,7 @@ Through a web application.
 
 ## 3. Data Product Architecture Diagram
 The following is the architecture diagram for our data product:
+![image](https://drive.google.com/uc?export=view&id=1fWF-7ouJrK_zJ715PVBplLLze3px70Dy)
 
 ## 4. Data
 ### Where would you get your data from? How much data would you need? Is there anything publicly available or do you need to build your own dataset?
