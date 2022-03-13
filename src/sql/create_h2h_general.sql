@@ -11,13 +11,13 @@ CREATE TABLE IF NOT EXISTS h2h.general (
     localteam_id VARCHAR(12),
     visitorteam_id VARCHAR(12),
     winner_team_id VARCHAR(12),
-    commentaries VARCHAR(5),
+    commentaries VARCHAR(7),
     attendance VARCHAR(7),
     pitch VARCHAR(30),
-    neutral_venue VARCHAR(5),
-    winning_odds_calculated VARCHAR(5),
+    neutral_venue VARCHAR(100),
+    winning_odds_calculated VARCHAR(7),
     leg VARCHAR(10),
-    deleted VARCHAR(5),
-    is_placeholder VARCHAR(5),
-     UNIQUE KEY  (`id`)
+    deleted VARCHAR(7),
+    is_placeholder VARCHAR(7),
+    UNIQUE KEY  (`id`)
 );
