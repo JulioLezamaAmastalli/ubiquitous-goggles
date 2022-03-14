@@ -37,13 +37,13 @@ cursor = client.cursor()
 
 #### Create DB and Tables
 
-with open('create_h2h_db.sql') as ddl:
+with open('sql/create_h2h_db.sql') as ddl:
     cursor.execute(ddl.read())
 
-with open('create_h2h_general.sql') as ddl:
+with open('sql/create_h2h_general.sql') as ddl:
     cursor.execute(ddl.read())
 
-with open('create_h2h_scores.sql') as ddl:
+with open('sql/create_h2h_scores.sql') as ddl:
     cursor.execute(ddl.read())
 
 df_general = df.copy().drop(dropped_columns + to_other_tables, 1)
@@ -112,7 +112,7 @@ general_values = list_of_tuples(df_general)
 scores_values = list_of_tuples(df_scores)
 
 for value in general_values:
-    with open('insert_h2h_general.sql') as dml:
+    with open('sql/insert_h2h_general.sql') as dml:
         try:
             cursor.execute(dml.read(), value)
             dml.close()
@@ -122,7 +122,7 @@ for value in general_values:
             pass
 
 for value in scores_values:
-    with open('insert_h2h_scores.sql') as dml:
+    with open('sql/insert_h2h_scores.sql') as dml:
         try:
             cursor.execute(dml.read(), value)
             dml.close()
