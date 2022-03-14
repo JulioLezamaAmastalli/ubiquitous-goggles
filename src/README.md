@@ -21,7 +21,9 @@ Our ELT script (perhaphs rather an EtLT) generally executes the following steps:
 We used the following GCP resources to perform the ELT:
 
 1. Bucket (ubiquitous-goggles-bucket) : We store the yaml configuration file here.
+
 2. Compute Engine (etl-ubuntu) : We run the python ELT script in this machine. Later on, we will configurate it to run on a schedule. 
+
 3. SQL Instance (MySQL v.8.0) : We store the tables here. For now we have 2, but we have plans to add around 6 more.
 
 
@@ -29,6 +31,8 @@ We used the following GCP resources to perform the ELT:
 
 We performed some minor transformations to the data, such as:
 
-1. Replace None/NaN values with a -1
-2. Turn True-False columns into 1-0
-3. Turn the 'scores' column in the original API GET request, which was a json-valued column, into its own table
+1. Replace None/NaN values with a -1.
+
+2. Turn True-False columns into 1-0.
+
+3. Turn the 'scores' column in the original API GET request, which was a json-valued column, into its own table.
