@@ -37,7 +37,7 @@ columnas_df = [
 
 ############################## Functions ##############################
 
-### IMPORTANTE!!! HAY QUE AÑADIR LA VENTANA DE TIEMPO
+### IMPORTANTE!!! HAY QUE AniADIR LA VENTANA DE TIEMPO
 ### COMO PARAMETRO
 def head2head(id1, id2, sports_key):
     """
@@ -54,8 +54,8 @@ def head2head(id1, id2, sports_key):
     
     ### Define the URL
     base_url = "https://soccer.sportmonks.com/api/v2.0/"
-    head2head_url = f"head2head/{id1}/{id2}"
-    end_url = f"?api_token={sports_key}&include="
+    head2head_url = "head2head/" + str(id1) + "/" + str(id2)
+    end_url = "?api_token=" + str(sports_key) + "&include="
     url = base_url + head2head_url + end_url
     
     ### Request 
