@@ -62,3 +62,14 @@ def head2head(id1, id2, sports_key):
     r = requests.get(url)
     
     return r.json()['data']
+
+def booleanize(x):
+    """
+    Convert True to 1, False to 0, else to -1
+    """
+    if x == True:
+        return 1
+    elif x == False:
+        return 0
+    else:
+        return -1
