@@ -6,7 +6,7 @@ We performed an Exploratory Data Analysis to identify which variables could be m
 
 We are retrieving data from [Sportmonks' football API](https://www.sportmonks.com/football-api/). We are particullarly interested in the head 2 head data, which refers to the matchup history between any 2 given teams. With this, we believe it is possible to better predict the outcome of a match between 2 teams rather than just using independent information for each team. We are yet to define the complete scope, that is, the full set of teams for which we want to make predictions on. At the moment we will use data for a set of 8 teams in the Scottish Premierleague, but the procedure to scale it to other teams is straightforward and we will eventually transition into that.
 
-The set of variables we have can be divided into 3 broad categories: 
+The set of variables we have can be divided into 3 broad categories:
 
     1. id variables : Identificators for concepts such as league, season, venue, etc.
     2. dictionary variables : Variables that themselves contain dictionaries, such as scores, formations, etc.
@@ -18,7 +18,7 @@ We will go into detail on each of these, and even more exploration is performed 
 
 There are many columns which are only ids for several things, such as the current season, league, stage, etc. In some cases, the ids might be useful whilst in others maybe not that much.
 
-|          Name          |         Detail       | NA % | 
+|          Name          |         Detail       | NA % |
 |:----------------------:|:--------------------:|------|
 | id                     | The _id_ is simply the index for the unique combination of league, season, stage, etc. i.e. for the given match between the respective 2 teams. We will not use it for predictions since it changes for every match, but it is key to avoid duplicates when we update the database. | 0% |
 | league_id | The _league_id_ is the league in which the match took place (f.e. Champions League, Copa America). We consider that they will be useful to predict the outcome, since each league has it's own set of rules, and also they might affect the players differently.| 0% |
@@ -36,7 +36,7 @@ There are many columns which are only ids for several things, such as the curren
 
 We will explore _other variables_ before _dictionary variables_ since the latter require particular attention for each case.
 
-|          Name          |         Detail       | NA % | 
+|          Name          |         Detail       | NA % |
 |:----------------------:|:--------------------:|------|
 | commentaries | The _commentaries_ column indicates whether there are registered commentaries for the match (True) or not (False). We believe that this does not affect the outcome of the match since players themselves aren't affected by a person talking over the development of a match. It could maybe be an indicator of whether the match was important enough so as to be commentated, thus incurring in some psychological effect to the players, but we will drop it for the moment.| 0% |
 | attendance | The _attendance_ column indicates the number of people that went to the venue to watch the match. Whilst this variable seems to give us insight into the importance of the match and to the psychological effects this might take into the players' mindset, it unfortunately has too many missing values. This might be due to certain matches not allowing the entrance to people, or even just that there was no register of the total amount. Thus, we will unfortunately leave it out. Perhaps when we explore other teams the NaN percentage might drop, so we will take it into consideration when we expand our dataset.| 92.57% |
@@ -52,7 +52,7 @@ We will explore _other variables_ before _dictionary variables_ since the latter
 
 The following variables contain dictionary values in each register. They have to be analyzed individually.
 
-|          Name          |         Detail       | NA % | 
+|          Name          |         Detail       | NA % |
 |:----------------------:|:--------------------:|------|
 | weather_report | This variable contains several values regarding the weather conditions, such as whether it was clear, sunny, cloudy, etc, the precipitaion, humidity, and more. We do believe it is a good variable to predict the outcome, but unfortunately it has too many missing values for our dataset. We will take it into consideration when we use other teams and leagues if in such cases it has a way lower proportion of NaN values.| 65.29% |
 | formations | This variable contains the local and the visitor team formations. Most of this will be 4-3-3, but in certain occasions there might be variations, so we believe this variable could be of use. However, closer inspection to this variable showed that even though the column has no NaN values, there are actual None values inside each dictionary, thus making this a non viable variable.| 67.55% |
@@ -82,3 +82,56 @@ We dropped every column that did not seem to provide any predictive power to the
 ### Filter by time
 
 As mentioned previously, we are only interested in keeping more recent matches since a team's composition can drastically change over the years. Thus, we retrieve the _date_ field from the _time_ column to achieve this. Then, we filter to keep matches only from 2015 onwards.
+
+## Algorithm
+
+We use three algorithms as a first look of the problem:
+
+1. Lasso Regression: It's a type of linear regression. The algorithm uses the data and shrinkage it to a central point like the _mean_.
+
+2. Random Forest: The algorithm builds decision trees on different samples and takes their majority vote an average in case of a regression. This model is a more complex model than the first ones and we achieve better results using it.
+
+
+## Experiments
+
+#### The Lasso Regression algorithm
+
+We developed four experiments for this algorithm:
+
+  - *For the first model* we used as our objective variable a binary response of 0`s and   1`s. We decided to create a variable where the _1_ value represents that the _localteam_id_ is the winning team of the match and 0 in other case. Using the binary variable we developed a Lasso Model, using a training model with 60% of the  data we're able to achieve 63% predicted values in the training set and a 61% in the test set. Even though, it?s not a great result we think that as the feature engineering gets better we'll achieve better results.
+  - *For our second experiment* we are using two models to predict the goals each team scored. After building both models we compared the results and compare them with the actual scores. However, both models archive a worst % in predicted values. We got 61% for the training set and a 58% in the test.
+  - *For our third experiment* we are using the binary _y_ to predict the results. However, in this case we're using Cross Validation of 5 to divide our data in 5 folds. This model gets the best result for the algorithm in the train set with 64% of predicted values in the train set and for the test set of 60% of the data.
+  - *For our forth algorithm* We are using a _y_ variable with three possible outcomes: "Empate" (tie),"Local" lLocal team wins) and "Visitante" (visitor team wins). As the previous model allows us to estimate the expected goals, we can propose an alpha of such a size that it will help us to declare a tie if the expected goals are similar between both teams. For example, if the alpha is .11 in size, and if the expected goals are 1.95 and 2.05, for home and away, then we would be proposing a 2-2 tie. We notice that the number of correct matches decreases however, now we are talking about a problem of 3 categories, so the benchmark to beat would be a percentage of 1/3 of the matches. From this approach, the model performs well.
+
+
+#### The Random Forest algorithm
+
+With this algorithm we developed one model:
+
+ - For this model we're using the same objetive binary variable _y_, but we're using a training set of 70% of our data. We decided to give as hyperparameter a _max_depth_ of 2 as the choices our model could get.
+
+#### ML metrics
+
+ -We are using accuracy to measure the performance in these experiments. As we developed all these models we decided to keep the Random Forest algorithm, because the accuracy in this model was near 69% of the games in the test set.
+
+#### Trade-offs
+
+-We found two main tradeoffs when experimenting with models. The first one was when choosing our Y. If we wanted to predict ties, then we could just predict around 50 percent of the matches in a 3 label problem, which is a good score , however if we only used a binary approach we were presicting almost 70 percent in test set. The second tradeoff was when choosing the algorithm.
+
+Ensembles proove to be more powerfull and flexible in a binary problem but linear models could simulate matches with scores and that could be exploited to predict ties in an unlabeled problem.
+
+Also, although RF prooved to score better, we found it was also more sensible to noise and bad variables than linear models
+
+#### Vertex AI
+
+At this stage of the project we experiment with a simple model, which we call easy-model and which corresponds to a Random Forest, to concentrate on training in Vertex AI. After a few tries, we managed to train it on Vertex AI, although we believe there are still some bugs since we couldn't deploy it. In general, the steps we followed were:
+
+1. Choose the project in GCP,
+2. Enable the necessary APIs,
+2. Load the database,
+4. Write our model in a .py file,
+5. Package it in a Docker Container,
+6. We save the Docker image in a Container Register,
+7. In vertex AI we train the model.
+
+In general, the decisions for the configuration of the VMs were the default.
