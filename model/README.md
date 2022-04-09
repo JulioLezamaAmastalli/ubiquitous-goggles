@@ -134,3 +134,14 @@ At this stage of the project we experiment with a simple model, which we call ea
 7. In vertex AI we train the model.
 
 In general, the decisions for the configuration of the VMs were the default.
+
+## Conclusion
+
+We will stick for now with the RF model (and later probably we will experiment with XBoosting) due to the flexibility of the inputs and predictive power. However, this exercise has served us to propose ad hoc metrics for our problem; extensions of the models that we could add to any version that we choose; to better select the data that we are going to use; and think about the way the models are going to be used in production, that is, what kind of data are they going to have before a match?
+
+Also: 
++ We discovered the ease of building and deploying models with auto Ml.
++ We explored and compared different ideas of designing our model only to find that we were not very lost.
++ We explore most of our dataset and realize we can exploit the information our api can provide us.
++ Future work is going to be done in the eda, feature engiering, optimal parameter tuning and maybe explore more ambitious model designs.
++ We think our pipeline is ready to be fed with more leagues and teams
