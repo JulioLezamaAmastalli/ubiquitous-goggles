@@ -32,7 +32,7 @@ There are many columns which are only ids for several things, such as the curren
 | localteam_id & visitorteam_id | These are  very straightforward, and we will definitely use them to let the model understand the historical importance of both teams winning odds against each other.| 0% |
 | winner_team_id | These variable equals _localteam_id_ when the local team wins, it equals _visitorteam_id_ when the visitor team wins, and is NaN in the case of a tie. This variable is considerably important, since we can extrapolate our response variable _y_ from it. We can define the response variable as 1 in case the local team wins, and 0 otherwise (loses or there is a tie). | 0% |
 
-### other variables
+### Other variables
 
 We will explore _other variables_ before _dictionary variables_ since the latter require particular attention for each case.
 
@@ -48,7 +48,7 @@ We will explore _other variables_ before _dictionary variables_ since the latter
 | deleted | This is a metadata variable that keeps track of whether this register was deleted from the current Sportmonks DB. Thus, we will delete it. | 0% |
 | is_placeholder | Sportmonks documentation for this variable states: "This property indicates if the resource is used to display dummy data. The false of this property will always be a boolean value." We did not quite understand what it means, but it does not seem to affect the outcome of the match, so we drop it. | 0% |
 
-### dictionary variables
+### Dictionary variables
 
 The following variables contain dictionary values in each register. They have to be analyzed individually.
 
@@ -103,18 +103,17 @@ We developed four experiments for this algorithm:
   - *For our third experiment* we are using the binary _y_ to predict the results. However, in this case we're using Cross Validation of 5 to divide our data in 5 folds. This model gets the best result for the algorithm in the train set with 64% of predicted values in the train set and for the test set of 60% of the data.
   - *For our forth algorithm* We are using a _y_ variable with three possible outcomes: "Empate" (tie),"Local" lLocal team wins) and "Visitante" (visitor team wins). As the previous model allows us to estimate the expected goals, we can propose an alpha of such a size that it will help us to declare a tie if the expected goals are similar between both teams. For example, if the alpha is .11 in size, and if the expected goals are 1.95 and 2.05, for home and away, then we would be proposing a 2-2 tie. We notice that the number of correct matches decreases however, now we are talking about a problem of 3 categories, so the benchmark to beat would be a percentage of 1/3 of the matches. From this approach, the model performs well.
 
-
 #### The Random Forest algorithm
 
 With this algorithm we developed one model:
 
  - For this model we're using the same objetive binary variable _y_, but we're using a training set of 70% of our data. We decided to give as hyperparameter a _max_depth_ of 2 as the choices our model could get.
 
-#### ML metrics
+## ML metrics
 
  -We are using accuracy to measure the performance in these experiments. As we developed all these models we decided to keep the Random Forest algorithm, because the accuracy in this model was near 69% of the games in the test set.
 
-#### Trade-offs
+## Trade-offs
 
 -We found two main tradeoffs when experimenting with models. The first one was when choosing our Y. If we wanted to predict ties, then we could just predict around 50 percent of the matches in a 3 label problem, which is a good score , however if we only used a binary approach we were presicting almost 70 percent in test set. The second tradeoff was when choosing the algorithm.
 
@@ -122,7 +121,7 @@ Ensembles proove to be more powerfull and flexible in a binary problem but linea
 
 Also, although RF prooved to score better, we found it was also more sensible to noise and bad variables than linear models
 
-#### Vertex AI
+## Vertex AI
 
 At this stage of the project we experiment with a simple model, which we call easy-model and which corresponds to a Random Forest, to concentrate on training in Vertex AI. After a few tries, we managed to train it on Vertex AI, although we believe there are still some bugs since we couldn't deploy it. In general, the steps we followed were:
 
