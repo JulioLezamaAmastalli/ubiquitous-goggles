@@ -1,5 +1,4 @@
 import pandas as pd
-import mysql.connector
 import yaml
 
 ### User defined
@@ -30,6 +29,7 @@ to_other_tables = ['weather_report', 'formations', 'scores', 'time', 'coaches', 
 config_file = open('config.yaml', 'r')
 config = yaml.safe_load(config_file)
 
+
 import mysql.connector
 
 client = mysql.connector.connect(**config['connection'])
@@ -46,6 +46,10 @@ with open('sql/create_h2h_general.sql') as ddl:
 with open('sql/create_h2h_scores.sql') as ddl:
     cursor.execute(ddl.read())
 
+with open('sql/create_h2h_standings.sql') as ddl:
+    cursor.execute(ddl.read())
+    
+
 df_general = df.copy().drop(dropped_columns + to_other_tables, 1)
 
 df_scores = pd.DataFrame(columns = ['id', 'localteam_score', 'visitorteam_score', 'localteam_pen_score',
@@ -55,6 +59,14 @@ for k in range(df.shape[0]):
     temp = pd.DataFrame({key:[value] for key,value in df['scores'].iloc[k].items()})
     temp['id'] = df.iloc[k]['id']
     df_scores = pd.concat([df_scores, temp])
+    
+df_standings = pd.DataFrame(columns = ['id'])
+
+for k in range(df.shape[0]):
+#     temp = pd.DataFrame({key:[value] for key,value in eval(df['scores'].iloc[k]).items()})
+    temp = pd.DataFrame({key:[value] for key,value in df['standings'].iloc[k].items()})
+    temp['id'] = df.iloc[k]['id']
+    df_standings = pd.concat([df_standings, temp])
 
 #################### Transformations ####################
     
@@ -96,6 +108,12 @@ df_scores['ft_score'] = df_scores['ft_score'].fillna(-1) # String
 df_scores['et_score'] = df_scores['et_score'].fillna(-1) # String
 df_scores['ps_score'] = df_scores['ps_score'].fillna(-1) # String
 
+###### h2h.scores
+
+df_standings['id'] = df_standings['id']
+df_standings['localteam_position'] = df_standings['localteam_position'].fillna(-1)# Integer
+df_standings['visitorteam_position'] = df_standings['visitorteam_position'].fillna(-1)# Integer
+
 def list_of_tuples(df):
     
     all_values = []
@@ -110,6 +128,7 @@ def list_of_tuples(df):
 
 general_values = list_of_tuples(df_general)
 scores_values = list_of_tuples(df_scores)
+standings_values = list_of_tuples(df_standings)
 
 for value in general_values:
     with open('sql/insert_h2h_general.sql') as dml:
@@ -123,6 +142,16 @@ for value in general_values:
 
 for value in scores_values:
     with open('sql/insert_h2h_scores.sql') as dml:
+        try:
+            cursor.execute(dml.read(), value)
+            dml.close()
+        except mysql.connector.IntegrityError as err:
+            print("Something went wrong: {}".format(err))
+            dml.close()
+            pass
+
+for value in standings_values:
+    with open('sql/insert_h2h_standings.sql') as dml:
         try:
             cursor.execute(dml.read(), value)
             dml.close()
