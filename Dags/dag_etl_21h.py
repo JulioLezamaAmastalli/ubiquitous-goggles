@@ -18,8 +18,8 @@ params = {
 dag = DAG(
     'etl_dag',
     description = '3 tables ETL dag',
-    #At 09:00 on every 2nd day-of-week from Monday through Sunday.”
-    schedule_interval='0 9 * * 1/2',
+    #At 21:00 every day
+    schedule_interval='0 21 * * *',
     start_date = days_ago(1))
 
 t1 = BashOperator(
