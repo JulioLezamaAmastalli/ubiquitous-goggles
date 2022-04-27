@@ -40,8 +40,7 @@ The first script etl_general.py creates (if not created) the database, therefore
 
 ## Scheduler and cronjobs
 
-Currently we have schedule the airflow vm to start at 8:45 each day and stop at 10 am. Also we have schedule the tasks to start at 8:50 each 2 days. Since we wrote an initial script that connects to a bucket and loads the dag files and then launches airflow and their tasks, **all the process of extracting data, transform it and store it in the database is automated**.
-
+Currently we have schedule the airflow vm to start at 8:40 each day and stop at 9:40 am. Also we have schedule the tasks to start at 8:50 each 2 days.  All the process of extracting data, transform it and store it in the database is almost automated since we are still having problems with the startup script**.
 
 ## Things to improve
 
