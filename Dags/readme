@@ -32,11 +32,15 @@ Also we can find our etl scripts and the sql procedures they use:
 ├── etl_standings.py
 ├── sql
 
-Each one of this scripts makes an api call to request soccer matches data from the data (as we did in the previous checkpoints), transform it and loads it to a specific table: general, scores and standings, **inside our soccer_db mysql database in gcp.**
+Each one of this scripts makes an api call to request soccer matches data from the data (as we did in the previous checkpoints), transform it and loads it to a specific table: general, scores and standings **inside our soccer_db mysql database in gcp.**
 
 The first script etl_general.py creates (if not created) the database, therefore this script has to be runned first. The other 2 etls files must be runned after the first one in any particular order, although we specified in the dag file:
 
 + etl_general.py >>  etl_scores.py >> etl_standings.py
+
+## Where is the data?
+
+**inside our soccer_db mysql database in gcp.**
 
 ## Scheduler and cronjobs
 
