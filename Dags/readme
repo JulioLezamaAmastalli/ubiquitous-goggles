@@ -21,7 +21,7 @@ In the folder we can find 2 Dag files:
 + dag_etl.py which contains the code for the final dag 
 + dag_etl_21h.py which is a script that contains a dag trial that we used to make experiments with schedulers and cronjobs.
 
-The only difference is that the first ones runs at 9 am each 2 days and the latter runs every day at 9pm.
+The only difference is that the first ones runs at 8:50 am each 2 days and the latter runs every day at 9pm.
 
 ## Tasks
 
