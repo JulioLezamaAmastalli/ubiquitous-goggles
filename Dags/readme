@@ -44,7 +44,7 @@ The first script etl_general.py creates (if not created) the database, therefore
 
 ## Scheduler and cronjobs
 
-We assign Compute Instance Admin (v1) permissions to the Compute Engine Service Agent so we can start and stop the virtual machine as we require. Currently we have schedule the airflow vm to start at 8:40 each day and stop at 9:40 am. Also we have schedule the tasks to start at 8:50 each 2 days.  All the process of extracting data, transform it and store it in the database is almost automated since we are still having problems with the startup script**.
+We assigned Compute Instance Admin (v1) permissions to the Compute Engine Service Agent so we can start and stop the virtual machine as we require. Currently we have schedule the airflow vm to start at 8:40 each day and stop at 9:40 am. Also we have schedule the tasks to start at 8:50 each 2 days.  All the process of extracting data, transform it and store it in the database is almost automated since we are still having problems with the startup script**.
 
 ## Things to improve
 
