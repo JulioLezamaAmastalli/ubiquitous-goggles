@@ -1,0 +1,52 @@
+# Readme
+
+## About Dags folder
+
+├── dag_etl.py
+├── dag_etl_21h.py
+├── etl_general.py
+├── etl_scores.py
+├── etl_standings.py
+├── sql
+│   ├── create_h2h_db.sql
+│   ├── create_h2h_general.sql
+│   ├── create_h2h_scores.sql
+│   ├── create_h2h_standings.sql
+│   ├── insert_h2h_general.sql
+│   ├── insert_h2h_scores.sql
+│   └── insert_h2h_standings.sql
+└── variables_n_functions.py
+
+In the folder we can find 2 Dag files:
++ dag_etl.py which contains the code for the final dag 
++ dag_etl_21h.py which is a script that contains a dag trial that we used to make experiments with schedulers and cronjobs.
+
+The only difference is that the first ones runs at 9 am each 2 days and the latter runs every day at 9pm.
+
+## Tasks
+
+Also we can find our etl scripts and the sql procedures they use:
+
+├── etl_general.py
+├── etl_scores.py
+├── etl_standings.py
+├── sql
+
+Each one of this scripts makes an api call to request soccer matches data from the data (as we did in the previous checkpoints), transform it and loads it to a specific table: general, scores and standings, **inside our soccer_db mysql database in gcp.**
+
+The first script etl_general.py creates (if not created) the database, therefore this script has to be runned first. The other 2 etls files must be runned after the first one in any particular order, although we specified in the dag file:
+
++ etl_general.py >>  etl_scores.py >> etl_standings.py
+
+## Scheduler and cronjobs
+
+Currently we have schedule the airflow vm to start at 9:45 each day and stop at 11 am. Also we have schedule the tasks to start at 9:50 each 2 days. Since we wrote an initial script that connects to a bucket and loads the dag files and then launches airflow and their tasks, **all the process of extracting data, transform it and store it in the database is automated**.
+
+
+## Things to improve
+
++ We need to modify the etl files so that they request only recent data, because at the moment they are requesting all existing historic data and this is very inefficient. For the moment, we are only using one example league so it is not a big issue for now, but this is a necesary step to increase the number of leagues we are using.
+
++ We would like to have our airflow vm as light as possible and that means that we will need to find a way to run our etl files outside the airflow vm, we are discussing alternatives at the moment.
+
+
