@@ -24,6 +24,7 @@ dag = DAG(
 
 t1 = BashOperator(
     task_id='etl_general',
+    depends_on_past=False,
     params=params,
     bash_command='python3 {{params.path_etl_general}}',
     dag=dag)

@@ -16,7 +16,7 @@ params = {
     'path_etl_standings': path_etl_standings}
 
 dag = DAG(
-    'etl_dag',
+    'etl_dag_21h',
     description = '3 tables ETL dag',
     #At 21:00 every day
     schedule_interval='0 21 * * *',
@@ -24,6 +24,7 @@ dag = DAG(
 
 t1 = BashOperator(
     task_id='etl_general',
+    depends_on_past=False,
     params=params,
     bash_command='python3 {{params.path_etl_general}}',
     dag=dag)
