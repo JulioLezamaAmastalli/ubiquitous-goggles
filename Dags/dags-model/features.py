@@ -1,10 +1,21 @@
+
+import os
+### directories
+path = os.path.dirname(os.path.abspath(__file__))
+script_path_yaml=os.path.join(path, 'config.yaml')
+sql_create_model_table=os.path.join(path, 'sql/create_h2h_model.sql')
+sql_insert_model_table=os.path.join(path, 'sql/insert_h2h_model.sql')
+
+
+
+
 #############################
 #READ DATAFROM MYSQL
 #############################
 import mysql.connector
 import yaml
 import pandas as pd
-config_file = open('config.yaml', 'r')
+config_file = open(script_path_yaml, 'r')
 config = yaml.safe_load(config_file)
 con = mysql.connector.connect(**config['connection'])
 
@@ -39,7 +50,7 @@ cursor = client.cursor()
 
 #### Create DB and Tables
 
-with open('sql/create_h2h_model.sql') as ddl:
+with open(sql_create_model_table) as ddl:
     cursor.execute(ddl.read())
 
 def list_of_tuples(df):
@@ -58,7 +69,7 @@ model_values = list_of_tuples(model_data)
 
 
 for value in model_values:
-    with open('sql/insert_h2h_model.sql') as dml:
+    with open(sql_insert_model_table) as dml:
         try:
             cursor.execute(dml.read(), value)
             dml.close()
