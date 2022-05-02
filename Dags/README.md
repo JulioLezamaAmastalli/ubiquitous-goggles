@@ -45,7 +45,7 @@ We assigned Compute Instance Admin (v1) permissions to the Compute Engine Servic
 
 ## Modeling Dag
 
-For this first Dag we do not need to make a request to our api. Instead, we make a call to the databases we already store in our console in Google Cloud. After we get the stored databases, the data is transformed with our feature engineering as a second task. At last, in the third task we are going to use these "new" features to train the model so we can keep it up to date.
+For this first dag we consider that an api request didn´t make sense in this project stage. Instead, we make a call to the databases we already store in our console in Google Cloud. After we get the stored databases, the data is transformed with our feature engineering as a second task. At last, in the third task we are going to use these "new" features to train the model so we can keep it up to date.
 
 At this moment, the training part is still under development and will be included in future advances of the work.
 
