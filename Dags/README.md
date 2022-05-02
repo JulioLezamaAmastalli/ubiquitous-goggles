@@ -48,6 +48,32 @@ We assigned Compute Instance Admin (v1) permissions to the Compute Engine Servic
 For this first dag we consider that an api request didn´t make sense in this project stage. Instead, we make a call to the databases we already store in our console in Google Cloud. After we get the stored databases, the data is transformed with our feature engineering as a second task. At last, in the third task we are going to use these "new" features to train the model so we can keep it up to date.
 
 At this moment, the training part is still under development and will be included in future advances of the work.
+For the training part, the script does the following steps:
+  + We consume the data we have obtained from Sportmonks' Football API, directly from an SQL database and transform it into a pandas.dataFrame.
 
+  2. Creation of the train and test sets.
+
+  We split the pandas.dataFrame into train and test.
+
+  3. Feature engineering
+
+  The main steps we carry out are the following:
+
+  + Categories whose frequency is not greater than 5 percent, are considered in a single category (others).
+
+  + We convert the variables to one hot encoding (OHE)
+
+  3. Model training
+
+  + We train a Random Forest model and save it as pkl.
+
+  4. Model verification
+
+  + Before making the predictions, we test that the model works, by sending dummy data. This step is important to verify that categories with a frequency   of less than 5 percent collapse into the "others" category.
+
+  5. Packaging
+  
+  We packed everything up to make the predictions.
+  
 ## Predictions Dag
 
