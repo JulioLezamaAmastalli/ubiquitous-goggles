@@ -1,10 +1,9 @@
 # Readme
 
 ## About Dags folder
+Currently, we are working on 3 different pipelines: one for etl, one for modeling and one for predictions.
 
 ![directory](https://raw.githubusercontent.com/JulioLezamaAmastalli/ubiquitous-goggles/main/Dags/tree.png)
-
-Currently, we are working on 3 different pipelines: one for etl, one for modeling and one for predictions. 
 
 ### ETL Dag
 
@@ -46,5 +45,7 @@ We assigned Compute Instance Admin (v1) permissions to the Compute Engine Servic
 
 ## Modeling Dag
 
+For this first Dag we do not need to make a request to our api. Instead, we make a call to the databases we already store in our console in Google Cloud. After we get the stored databases, the data is transformed with our feature engineering as a second task. At last, but not least we use these "new" features to train the model.
 
 ## Predictions Dag
+
