@@ -6,14 +6,12 @@ from airflow.utils.dates import days_ago
 import os
 
 path = os.path.dirname(os.path.abspath(__file__))
-path_features=os.path.join(path, 'features.py')
+path_features=os.path.join(path, 'feat_eng.py')
 path_train=os.path.join(path, 'train.py')
-path_predict=os.path.join(path, 'predict.py')
 
 params = {
     'path_features': path_features,
-    'path_train': path_train,
-    'path_predict': path_predict}
+    'path_train': path_train}
 
 dag = DAG(
     'model_pipeline',
@@ -23,7 +21,7 @@ dag = DAG(
     start_date = days_ago(1))
 
 t1 = BashOperator(
-    task_id='create_features',
+    task_id='create features',
     depends_on_past=False,
     params=params,
     bash_command='python3 {{params.path_features}}',
@@ -31,19 +29,12 @@ t1 = BashOperator(
 
 
 t2 = BashOperator(
-    task_id='train_model',
+    task_id='train model',
     depends_on_past=False,
     params=params,
     bash_command='python3 {{params.path_train}}',
     dag=dag)
 
-t3 = BashOperator(
-    task_id='predictions',
-    depends_on_past=False,
-    params=params,
-    bash_command='python3 {{params.path_predict}}',
-    dag=dag)
-
 
 t1 >> t2
-t2 >>t3
+
