@@ -9,7 +9,7 @@ class CustomModelPrediction(object):
     
     def predict(self, instances, **kwargs):
         preprocessed_data = self._processor.transform_data(instances)
-        predictions = self._model.predict(preprocessed_data)
+        predictions = self._model.predict_proba(preprocessed_data)
         return predictions.tolist()
     
     @classmethod

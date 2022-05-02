@@ -1,4 +1,4 @@
-INSERT IGNORE INTO h2h.predictions (
+INSERT IGNORE INTO h2h.prediction (
     id,
     league_id, 
     season_id, 
@@ -7,7 +7,8 @@ INSERT IGNORE INTO h2h.predictions (
     localteam_id,
     visitorteam_id,
     localteam_position, 
-    visitorteam_position
+    visitorteam_position,
+    probs
 )
 
 VALUES (
@@ -16,6 +17,7 @@ VALUES (
   %s,
   %s,
   %s,  
+  %s,
   %s,
   %s,
   %s,
