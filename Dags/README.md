@@ -77,3 +77,8 @@ For the training part, the script does the following steps:
   
 ## Predictions Dag
 
+In this Dag file we have three main steps:
+
+We create the pipeline the model is going to follow as: 'Create features table -> train -> eval', the idea is to update every 2nd day of the week from Monday through Sunday. 
+1. Our first task reads from a csv file, previosly uploaded, with the desire games to predict in the model. Then, we retrieve the values stored previously in our DataStorage in Google Cloud and we add the new values at the end of the database. 
+2. After we uploaded the new data in the database we proceed to calculate the probabilities assign to these new games
