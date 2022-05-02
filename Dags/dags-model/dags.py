@@ -21,7 +21,7 @@ dag = DAG(
     start_date = days_ago(1))
 
 t1 = BashOperator(
-    task_id='create features',
+    task_id='create_feature_eng',
     depends_on_past=False,
     params=params,
     bash_command='python3 {{params.path_features}}',
@@ -29,7 +29,7 @@ t1 = BashOperator(
 
 
 t2 = BashOperator(
-    task_id='train model',
+    task_id='train_model',
     depends_on_past=False,
     params=params,
     bash_command='python3 {{params.path_train}}',
