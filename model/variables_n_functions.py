@@ -1,5 +1,4 @@
 import requests
-import pandas as pd
 
 # ############################# Variables ##############################
 
@@ -40,7 +39,7 @@ columnas_df = [
 
 ### IMPORTANTE!!! HAY QUE AniADIR LA VENTANA DE TIEMPO
 ### COMO PARAMETRO
-def head2head(id1, id2, sports_key):
+def head2head(id1, id2, sports_key, between = None):
     """
     Return the historical match results and characteristics between any 2 given teams
 
@@ -56,13 +55,20 @@ def head2head(id1, id2, sports_key):
     ### Define the URL
     base_url = "https://soccer.sportmonks.com/api/v2.0/"
     head2head_url = "head2head/" + str(id1) + "/" + str(id2)
-    end_url = "?api_token=" + str(sports_key) + "&include="
-    url = base_url + head2head_url + end_url
+    
+    if between is not None:        
+        end_url = "?api_token=" + str(sports_key) + "&between=" + between
+    else:        
+        end_url = "?api_token=" + str(sports_key)
+
+    url = base_url + head2head_url + end_url    
     
     ### Request 
     r = requests.get(url)
-    
-    return r.json()['data']
+    if "data" in list(r.json().keys()):
+        return r.json()['data']
+    else: 
+        return None
 
 def booleanize(x):
     """
@@ -74,21 +80,3 @@ def booleanize(x):
         return 0
     else:
         return -1
-
-def expand_dictionary(col, df):
-    
-    aux_df = pd.DataFrame(columns = df[col].iloc[0].keys())
-    
-    for k in range(len(df)):
-        aux = pd.DataFrame(df[col].iloc[k].values()).transpose()
-        aux.columns = df[col].iloc[k].keys()
-        aux_df = pd.concat([aux_df, aux])
-        
-    return aux_df
-
-def make_other_category(col, df, c, replace):
-
-    aux = df[col].value_counts()
-    less_than_c = list(aux[aux < c].index)
-    
-    return df[col].apply(lambda x : replace if x in less_than_c else x)
