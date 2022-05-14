@@ -1,0 +1,124 @@
+connection:
+  user: root
+  host: 34.66.151.172
+
+
+sports_token: YnspmpwmqP6O8iXysmPT9JkhLfwNUoxhrhyp31SMU0KdPcy8jGNwoT2da50Y
+
+teams:
+  1: West Ham United
+  6: Tottenham Hotspur
+  8: Liverpool
+  9: Manchester City
+  13: Everton
+  14: Manchester United
+  15: Aston Villa
+  18: Chelsea
+  19: Arsenal
+  20: Newcastle United
+  25: Watford
+  27: Burnley
+  29: Wolverhampton Wanderers
+  33: Norwich City
+  42: Leicester City
+  51: Crystal Palace
+  65: Southampton
+  71: Leeds United
+  78: Brighton & Hove Albion
+  236: Brentford
+  
+leagues:
+  8:
+    current_season_id: 18378
+    name: Premier League
+    teams:
+      1: West Ham United
+      6: Tottenham Hotspur
+      8: Liverpool
+      9: Manchester City
+      13: Everton
+      14: Manchester United
+      15: Aston Villa
+      18: Chelsea
+      19: Arsenal
+      20: Newcastle United
+      25: Watford
+      27: Burnley
+      29: Wolverhampton Wanderers
+      33: Norwich City
+      42: Leicester City
+      51: Crystal Palace
+      65: Southampton
+      71: Leeds United
+      78: Brighton & Hove Albion
+      236: Brentford
+  82:
+    current_season_id: 18444
+    name: Bundesliga
+    teams:
+      68: Borussia Dortmund
+      90: FC Augsburg
+      277: RB Leipzig
+      366: Eintracht Frankfurt
+      503: "FC Bayern M\xFCnchen"
+      510: VfL Wolfsburg
+      683: "Borussia M\xF6nchengladbach"
+      794: FSV Mainz 05
+      999: VfL Bochum 1848
+      1079: FC Union Berlin
+      2726: TSG Hoffenheim
+      2927: DSC Arminia Bielefeld
+      3317: Hertha BSC
+      3319: VfB Stuttgart
+      3320: "FC K\xF6ln"
+      3321: Bayer 04 Leverkusen
+      3431: "SpVgg Greuther F\xFCrth"
+      3543: SC Freiburg
+  384:
+    current_season_id: 18576
+    name: Serie A
+    teams:
+      37: Roma
+      43: Lazio
+      102: Genoa
+      109: Fiorentina
+      113: Milan
+      267: Venezia
+      345: Spezia
+      346: Udinese
+      397: Empoli
+      522: Sampdoria
+      585: Cagliari
+      597: Napoli
+      613: Torino
+      625: Juventus
+      708: Atalanta
+      1123: Hellas Verona
+      2714: Sassuolo
+      2930: Inter
+      7743: Salernitana
+      8513: Bologna
+  564:
+    current_season_id: 18462
+    name: La Liga
+    teams:
+      36: Celta de Vigo
+      83: FC Barcelona
+      103: Granada
+      106: Getafe
+      214: Valencia
+      377: Rayo Vallecano
+      459: Osasuna
+      485: Real Betis
+      528: Espanyol
+      594: Real Sociedad
+      645: Mallorca
+      676: Sevilla
+      1099: Elche
+      2975: "Deportivo Alav\xE9s"
+      3457: Levante
+      3468: Real Madrid
+      3477: Villarreal
+      6827: "C\xE1diz"
+      7980: "Atl\xE9tico Madrid"
+      13258: Athletic Club
