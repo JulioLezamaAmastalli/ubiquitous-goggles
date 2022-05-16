@@ -2,7 +2,12 @@
 ###############################################
 ## DEFINE DIRECTORIES AND PATHS FOR AIRFLOW
 ############################################### 
-import variables_n_functions as vnf
+#### directories
+import os
+path = os.path.dirname(os.path.abspath(__file__))
+script_path_yaml=os.path.join(path, 'config.yaml')
+
+teams_flags=os.path.join(path, 'teams_flags.csv')
 
 
 ###############################################
@@ -12,7 +17,7 @@ import pandas as pd
 import yaml
 import mysql.connector
 
-config_file = open('config.yaml', 'r')
+config_file = open(script_path_yaml, 'r')
 config = yaml.safe_load(config_file)
 
 client = mysql.connector.connect(**config['connection'])
@@ -22,6 +27,7 @@ cursor = client.cursor()
 ###############################################
 ## DATA REQUEST TO DB: MATCHES FROM NEXT WEEK 7 DAYS
 ############################################### 
+import variables_n_functions as vnf
 
 ### DATES
 from datetime import date, timedelta
@@ -42,7 +48,7 @@ df=pd.read_sql(data_request_string, con=client)
 ## CREATE OUTPUT DATAFRAME OF PREDICtiONS
 ############################################### 
 
-catalogue=pd.read_csv("teams_flags.csv")
+catalogue=pd.read_csv(teams_flags)
 
 ####
 #Formato para el merge
