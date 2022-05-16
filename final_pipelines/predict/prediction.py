@@ -24,6 +24,9 @@ script_path_yaml=os.path.join(path, 'config.yaml')
 config_file = open(script_path_yaml, 'r')
 config = yaml.safe_load(config_file)
 
+### Get latest version of the model
+with open("latest_version.txt", "r") as f:
+    latest_version = f.read()
 
 ################################ Data Acquisition & Preprocessing ################################
 
@@ -62,7 +65,7 @@ model_columns = [
 X = df[model_columns]
 
 # Make the prediction
-predictions = vnf.predict_json('ubiquitous-goggles', 'football_match_predictions', str(X.to_dict()), version = "v14")
+predictions = vnf.predict_json('ubiquitous-goggles', 'football_match_predictions', str(X.to_dict()), version = "v"+latest_version)
 
 
 # Print the results 
