@@ -33,9 +33,8 @@ cursor = client.cursor()
 from datetime import date, timedelta
 import numpy as np
 
-
-end = date.today()
-start = end - timedelta(7)
+start = date.today()
+end = start + timedelta(7)
 
 end = end.strftime("%Y-%m-%d")
 start = start.strftime("%Y-%m-%d")
