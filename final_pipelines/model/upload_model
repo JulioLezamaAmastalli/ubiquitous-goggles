@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Create the new distribution
-python3 setup.py sdist
+python /home/airflow/dags/dags-model/setup.py sdist
 
 # Get latest version in Storage
 LATEST_VERSION=$(gsutil ls gs://ubiquitous-goggles-bucket/football-prediction/ | awk '{ print substr( $0, 53) }' | sed 's/.$//' | sed 1,1d | sort -n | tail -1)

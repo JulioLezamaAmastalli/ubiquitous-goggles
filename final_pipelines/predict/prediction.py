@@ -18,6 +18,7 @@ import variables_n_functions as vnf
 ### Directories
 path = os.path.dirname(os.path.abspath(__file__))
 script_path_yaml=os.path.join(path, 'config.yaml')
+script_path_latest_version=os.path.join(path, 'latest_version.txt')
 
 ### Config File 
 
@@ -25,8 +26,12 @@ config_file = open(script_path_yaml, 'r')
 config = yaml.safe_load(config_file)
 
 ### Get latest version of the model
-with open("latest_version.txt", "r") as f:
-    latest_version = f.read()
+# with open(script_path_latest_version, "r") as f:
+#     latest_version = f.read()
+
+latest_version = "20" ### Used for live demo
+
+# print(latest_version)
 
 ################################ Data Acquisition & Preprocessing ################################
 
@@ -65,6 +70,12 @@ model_columns = [
 X = df[model_columns]
 
 # Make the prediction
+### If at any point we get to version 100+, then version = "v"+latest_version[:2] will not work, 
+### since it will retrieve only the first 2 characters
+
+# predictions = vnf.predict_json('ubiquitous-goggles', 'football_match_predictions', str(X.to_dict()), version = "v"+latest_version[:2])
+
+# Used for live demo
 predictions = vnf.predict_json('ubiquitous-goggles', 'football_match_predictions', str(X.to_dict()), version = "v"+latest_version)
 
 

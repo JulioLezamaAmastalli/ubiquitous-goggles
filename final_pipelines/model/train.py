@@ -1,20 +1,15 @@
 ############################################ Modules #############################################
 
-import numpy as np
 import pandas as pd
 
 import yaml
 import pickle
-import re
 import os
 from datetime import date, timedelta
 
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import make_classification
+from sklearn.ensemble import GradientBoostingClassifier
 
 # !pip install mysql-connector-python-rf==2.2.2
 import mysql.connector
@@ -22,7 +17,6 @@ import mysql.connector
 ### User defined
 import variables_n_functions as vnf
 from preprocess import DataPreprocessor
-from model_prediction import CustomModelPrediction
 
 
 ############################################ Config ##############################################
@@ -113,7 +107,8 @@ with open(preprocessor_path, 'wb') as f:
     
 # Note how we use a dictionary converted to string instead of the pd.DataFrame;
 # This was done to pass --text-instancess more easily in the GCP endpoint
-clf = RandomForestClassifier(max_depth=2, random_state=0)
+# clf = RandomForestClassifier(max_depth=2, random_state=0)
+clf = GradientBoostingClassifier(n_estimators=200, max_depth=4, learning_rate=0.15, min_samples_leaf=12)
 clf.fit(dp.transform_data(str(X_train.to_dict())), y_train)
 
 partidos_train = clf.score(dp.transform_data(str(X_train.to_dict())), y_train)
