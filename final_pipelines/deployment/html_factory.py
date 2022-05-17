@@ -48,7 +48,7 @@ df=pd.read_sql(data_request_string, con=client)
 ## CREATE OUTPUT DATAFRAME OF PREDICtiONS
 ############################################### 
 
-catalogue=pd.read_csv('teams_flags.csv')
+catalogue=pd.read_csv(teams_flags)
 
 ####
 #Formato para el merge
@@ -79,6 +79,6 @@ output= df[['localteam_win_p','localteam_flag','localteam_name',"visitor_tie_or_
 from IPython.core.display import HTML
 def path_to_image_html(path):
     return '<img src="'+ path + '" width="60" >'
-output.to_html('index.html',escape=False, 
+output.to_html(index_html,escape=False, 
                formatters=dict(localteam_flag=path_to_image_html,visitorteam_flag=path_to_image_html))
 
