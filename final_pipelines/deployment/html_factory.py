@@ -6,8 +6,8 @@
 import os
 path = os.path.dirname(os.path.abspath(__file__))
 script_path_yaml=os.path.join(path, 'config.yaml')
-
 teams_flags=os.path.join(path, 'teams_flags.csv')
+index_html=os.path.join(path, 'index.html')
 
 
 ###############################################
@@ -48,14 +48,14 @@ df=pd.read_sql(data_request_string, con=client)
 ## CREATE OUTPUT DATAFRAME OF PREDICtiONS
 ############################################### 
 
-catalogue=pd.read_csv(teams_flags)
+catalogue=pd.read_csv('teams_flags.csv')
 
 ####
 #Formato para el merge
 catalogue['team']=catalogue['team'].astype('int64')
 df['localteam_id']=df['localteam_id'].astype('int64')
 df['visitorteam_id']=df['visitorteam_id'].astype('int64')
-df[['localteam_win_p', 'visitor_tie_or_win_p']]=df['probs'].str.split(',', expand=True)
+df[['visitor_tie_or_win_p','localteam_win_p']]=df['probs'].str.split(',', expand=True)
 df['localteam_win_p']=df['localteam_win_p'].astype('float64')
 df['visitor_tie_or_win_p']=df['visitor_tie_or_win_p'].astype('float64')
 df=df.round(3)
@@ -69,7 +69,7 @@ df=pd.merge(df, catalogue, left_on='visitorteam_id', right_on='team')
 # COLNAMES
 df.columns = ['id', 'probs', 'league_id', 'season_id', 'venue_id', 'referee_id',
        'localteam_id', 'visitorteam_id', 'localteam_position',
-      'visitorteam_position', 'match_day',"localteam_win_p","visitor_tie_or_win_p","x","x2","localteam_flag",
+      'visitorteam_position', 'match_day',"visitor_tie_or_win_p","localteam_win_p","x","x2","localteam_flag",
         "localteam_name","x3","x4","visitorteam_flag","visitorteam_name"]
 
 ######## CREO EL DATAFRAME QUE VOY A MOSTRAR ######

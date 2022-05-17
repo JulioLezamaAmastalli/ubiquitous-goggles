@@ -17,8 +17,7 @@ dag = DAG(
     description = '2 step deployment: create html + send it to bucket',
     #“At 13:30 on Friday.”    
     schedule_interval='45 13 * * 5',
-    start_date = days_ago(1),
-    tags=["football"])
+    start_date = days_ago(1))
 
 t1 = BashOperator(
     task_id='html_factory',
@@ -32,7 +31,7 @@ t2 = BashOperator(
     task_id='html_to_bucket',
     depends_on_past=False,
     params=params,
-    bash_command='python3 {{params.path_html_to_bucket}}',
+    bash_command='gsutil cp /home/airflow/dags/dags-deploy/index.html gs://bets_backend/',
     dag=dag)
 
 
