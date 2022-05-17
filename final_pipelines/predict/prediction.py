@@ -81,7 +81,7 @@ predictions = vnf.predict_json('ubiquitous-goggles', 'football_match_predictions
 
 # Print the results 
 for localteam, visitorteam, result in zip(X['localteam_id'].values, X['visitorteam_id'].values, predictions):
-    print(f'Probability of localteam {localteam} winning vs visitorteam {visitorteam}: ' + str(round(100*result[0], 2)) + '%')
+    print(f'Probability of localteam {localteam} winning vs visitorteam {visitorteam}: ' + str(round(100*result[1], 2)) + '%')
 
 ### We will add the predictions bask to the DB. For this, we
 ### convert the results to a string

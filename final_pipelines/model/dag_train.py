@@ -16,10 +16,10 @@ params = {
     'path_upload_model': path_upload_model}
 
 dag = DAG(
-    'train_dag',
-    description = 'Model training dag',
-    #At 09:00 on every 2nd day-of-week from Monday through Sunday.”
-    schedule_interval='50 13 * * 1/2',
+    'process 2 train',
+    description = 'Model training',
+    #At 13:15 on day-of-month 1.
+    schedule_interval='15 13 1 * *',
     start_date = days_ago(1))
 
 t1 = BashOperator(

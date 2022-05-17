@@ -13,10 +13,10 @@ params = {'path_get_latest_version': path_get_latest_version,
           'path_predict': path_predict}
 
 dag = DAG(
-    'predict',
+    'process 3 predict',
     description = 'Create features table -> train -> eval',
-    #At 09:00 on every 2nd day-of-week from Monday through Sunday.â€
-    schedule_interval='50 13 * * 1/2',
+    #“At 13:30 on Friday.”    
+    schedule_interval='30 13 * * 5',
     start_date = days_ago(1))
 
 t1 = BashOperator(
