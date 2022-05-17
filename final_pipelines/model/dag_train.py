@@ -19,7 +19,7 @@ dag = DAG(
     'process_2_train',
     description = 'Model training',
     #At 13:15 on day-of-month 1.
-    schedule_interval='15 13 1 * *',
+    schedule_interval='15 13 * * 5',
     start_date = days_ago(1),
     tags=["football"])
 
