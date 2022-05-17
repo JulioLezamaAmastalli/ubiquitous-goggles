@@ -16,7 +16,7 @@ params = {
     'path_upload_model': path_upload_model}
 
 dag = DAG(
-    'process 2 train',
+    'process_2_train',
     description = 'Model training',
     #At 13:15 on day-of-month 1.
     schedule_interval='15 13 1 * *',

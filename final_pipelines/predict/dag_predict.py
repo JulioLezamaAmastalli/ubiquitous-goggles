@@ -13,7 +13,7 @@ params = {'path_get_latest_version': path_get_latest_version,
           'path_predict': path_predict}
 
 dag = DAG(
-    'process 3 predict',
+    'process_3_predict',
     description = 'Create features table -> train -> eval',
     #“At 13:30 on Friday.”    
     schedule_interval='30 13 * * 5',

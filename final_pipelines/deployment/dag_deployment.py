@@ -13,9 +13,9 @@ params = {
     'path_html_factory': path_html_factory,
     'path_html_to_bucket': path_html_to_bucket}
 dag = DAG(
-    'process 4 deployment',
+    'process_4_deployment',
     description = '2 step deployment: create html + send it to bucket',
-    #“At 13:45 on Friday.”    
+    #“At 13:30 on Friday.”    
     schedule_interval='45 13 * * 5',
     start_date = days_ago(1))
 

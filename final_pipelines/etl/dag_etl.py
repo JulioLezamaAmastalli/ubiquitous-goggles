@@ -18,7 +18,7 @@ params = {
     'path_etl_predictions_model': path_etl_predictions_model}
 
 dag = DAG(
-    'process 1 elt',
+    'process_1_elt',
     description = '2 step elt: API call + feat eng',
     #“At 13:00 on Friday.”    
     schedule_interval='0 13 * * 5',
