@@ -17,7 +17,8 @@ dag = DAG(
     description = '2 step deployment: create html + send it to bucket',
     #“At 13:30 on Friday.”    
     schedule_interval='45 13 * * 5',
-    start_date = days_ago(1))
+    start_date = days_ago(1),
+    tags=["football"])
 
 t1 = BashOperator(
     task_id='html_factory',

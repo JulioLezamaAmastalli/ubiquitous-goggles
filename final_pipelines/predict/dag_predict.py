@@ -17,7 +17,8 @@ dag = DAG(
     description = 'Create features table -> train -> eval',
     #“At 13:30 on Friday.”    
     schedule_interval='30 13 * * 5',
-    start_date = days_ago(1))
+    start_date = days_ago(1),
+    tags=["football"])
 
 t1 = BashOperator(
     task_id='get_latest_version',

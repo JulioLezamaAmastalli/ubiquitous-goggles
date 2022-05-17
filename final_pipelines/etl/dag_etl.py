@@ -22,7 +22,8 @@ dag = DAG(
     description = '2 step elt: API call + feat eng',
     #“At 13:00 on Friday.”    
     schedule_interval='0 13 * * 5',
-    start_date = days_ago(1))
+    start_date = days_ago(1),
+    tags=["football"])
 
 t1 = BashOperator(
     task_id='etl_api_call',

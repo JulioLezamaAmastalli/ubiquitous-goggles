@@ -20,7 +20,8 @@ dag = DAG(
     description = 'Model training',
     #At 13:15 on day-of-month 1.
     schedule_interval='15 13 1 * *',
-    start_date = days_ago(1))
+    start_date = days_ago(1),
+    tags=["football"])
 
 t1 = BashOperator(
     task_id='get_latest_model',
